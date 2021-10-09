@@ -18,5 +18,10 @@ interface PetRepository
     /**
      * @throws Exception
      */
+    public function findById(string $id): Pet;
+
+    /**
+     * @throws Exception
+     */
     public function store(Pet $pet): void;
 }

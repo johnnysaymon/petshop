@@ -8,6 +8,7 @@ use App\Domain\Entity\Pet\Pet;
 use App\Domain\Entity\Pet\PetBuilder;
 use App\Domain\Entity\Pet\PetCollection;
 use App\Domain\Repository\ClientRepository;
+use App\Domain\Repository\Exception\NotFoundInRepository;
 use App\Domain\Repository\PetRepository;
 use Exception;
 use PDO;
@@ -82,6 +83,39 @@ final class PetPdo implements PetRepository
             owner: $petData['owner'],
             id: $petData['id']
         );
+    }
+
+    public function findById(string $id): Pet
+    {
+        $query = <<<SQL
+            SELECT 
+                `id`, 
+                `name`, 
+                `age`,
+                `species_key` AS `species`,
+                `breed_name` AS `breedName`,
+                `owner_id` AS `ownerId`
+            FROM 
+                `pet`
+            WHERE
+                `id` = :id
+            LIMIT 0,1;
+        SQL;
+
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':id', $id, PDO::PARAM_STR);
+        $statement->execute();
+
+        $petData = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (! $petData) {
+            throw new NotFoundInRepository('pet.not-found '. $id);
+        }
+
+        $petData['owner'] = $this->clientRepository->findById($petData['ownerId']);
+
+        return $this->createPet($petData);
     }
 
     /**
