@@ -85,8 +85,8 @@ final class Service
     private function createClient(): Client
     {
         return ClientFactory::create(
-            name: $this->dataInput->name ? $this->dataInput->name : $this->clientCurrent->getName()->getValue(),
-            phone: $this->dataInput->phone ? $this->dataInput->phone : $this->clientCurrent->getPhone()->getValue(),
+            name: $this->dataInput->name ?: $this->clientCurrent->getName()->getValue(),
+            phone: $this->dataInput->phone ?: $this->clientCurrent->getPhone()->getValue(),
             id: $this->dataInput->id,
         );
     }

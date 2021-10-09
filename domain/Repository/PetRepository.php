@@ -24,4 +24,9 @@ interface PetRepository
      * @throws Exception
      */
     public function store(Pet $pet): void;
+
+    /**
+     * @throws Exception
+     */
+    public function update(Pet $pet): void;
 }

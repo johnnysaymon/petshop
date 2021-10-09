@@ -10,6 +10,7 @@ use App\Infra\Controller\Http\ClientUpdate;
 use App\Infra\Controller\Http\PetCreate;
 use App\Infra\Controller\Http\PetListing;
 use App\Infra\Controller\Http\PetShow;
+use App\Infra\Controller\Http\PetUpdate;
 use App\Infra\Handler\Error;
 use App\Infra\Middleware\Environment as EnvironmentMiddleware;
 use Psr\Container\ContainerInterface;
@@ -44,6 +45,8 @@ $app->group('/pet', function (RouteCollectorProxy $group)
     $group->get('/', PetListing::class);
 
     $group->post('/', PetCreate::class);
+
+    $group->patch('/{id}/', PetUpdate::class);
 
     $group->get('/{id}/', PetShow::class);
 });

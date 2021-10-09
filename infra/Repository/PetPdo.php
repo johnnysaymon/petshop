@@ -123,7 +123,7 @@ final class PetPdo implements PetRepository
      */
     public function store(Pet $pet): void
     {
-        $sql = <<<SQL
+        $query = <<<SQL
             INSERT INTO `pet` (
                 `id`, `name`, age, species_key, breed_name, owner_id
             ) VALUES (
@@ -136,7 +136,33 @@ final class PetPdo implements PetRepository
             );
         SQL;
 
-        $statement = $this->pdo->prepare($sql);
+        $this->prepareAndExecuteQuery($query, $pet);
+    }
+
+    /**
+     * @throws PDOException
+     */
+    public function update(Pet $pet): void
+    {
+        $query = <<<SQL
+            UPDATE `pet` 
+            SET
+                `name` = :name,
+                `age` = :age,
+                `species_key` = :speciesKey,
+                `breed_name` = :breedName,
+                `owner_id` =:ownerId
+            WHERE
+                `id` = :id
+            LIMIT 1;
+        SQL;
+
+        $this->prepareAndExecuteQuery($query, $pet);
+    }
+
+    private function prepareAndExecuteQuery(string $query, Pet $pet): void
+    {
+        $statement = $this->pdo->prepare($query);
 
         $statement->bindValue(':id', $pet->getId()->getValue(), PDO::PARAM_STR);
         $statement->bindValue(':name', $pet->getName()->getValue(), PDO::PARAM_STR);
@@ -147,4 +173,5 @@ final class PetPdo implements PetRepository
 
         $statement->execute();
     }
+
 }
