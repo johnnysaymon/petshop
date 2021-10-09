@@ -14,10 +14,10 @@ use Exception;
 use PDO;
 use PDOException;
 
-final class PetPdo implements PetRepository
+final class PetPdo extends RepositoryTransaction implements PetRepository
 {
     public function __construct(
-        private PDO $pdo,
+        protected PDO $pdo,
         private ClientRepository $clientRepository
     ){}
 
@@ -32,6 +32,20 @@ final class PetPdo implements PetRepository
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':id', $id, PDO::PARAM_STR);
+        $statement->execute();
+    }
+
+
+    public function deleteAllFromOwnerId(string $ownerId): void
+    {
+        $query = <<<SQL
+            DELETE FROM `pet`
+            WHERE `owner_id` = :ownerId;
+        SQL;
+
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':ownerId', $ownerId, PDO::PARAM_STR);
         $statement->execute();
     }
 

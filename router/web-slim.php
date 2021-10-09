@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Infra\Container\Factory as ContainerFactory;
 use App\Infra\Controller\Http\ClientCreate;
+use App\Infra\Controller\Http\ClientDelete;
 use App\Infra\Controller\Http\ClientFindById;
 use App\Infra\Controller\Http\ClientListing;
 use App\Infra\Controller\Http\ClientUpdate;
@@ -36,9 +37,11 @@ $app->group('/client', function (RouteCollectorProxy $group)
 
     $group->post('/', ClientCreate::class);
 
+    $group->get('/{id}/', ClientFindById::class);
+
     $group->patch('/{id}/', ClientUpdate::class);
 
-    $group->get('/{id}/', ClientFindById::class);
+    $group->delete('/{id}/', ClientDelete::class);
 });
 
 $app->group('/pet', function (RouteCollectorProxy $group)

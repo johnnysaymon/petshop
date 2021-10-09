@@ -13,13 +13,27 @@ use App\Exception\Exception;
 use PDO;
 use PDOException;
 
-final class ClientPdo implements ClientRepository
+final class ClientPdo extends RepositoryTransaction implements ClientRepository
 {
-    private PDO $pdo;
+    protected PDO $pdo;
 
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
+    }
+
+    public function delete(string $id): void
+    {
+        $query = <<<SQL
+            DELETE FROM `client`
+            WHERE `id` = :id
+            LIMIT 1;
+        SQL;
+
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':id', $id, PDO::PARAM_STR);
+        $statement->execute();
     }
 
     public function findAll(): ClientCollection

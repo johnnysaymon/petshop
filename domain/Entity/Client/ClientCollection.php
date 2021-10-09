@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Entity\Client;
 
 use App\Domain\Entity\CollectionJsonSerializable;
-use App\Exception\Exception;
+use Exception;
 
 final class ClientCollection extends CollectionJsonSerializable
 {

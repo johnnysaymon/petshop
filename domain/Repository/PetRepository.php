@@ -10,10 +10,21 @@ use Exception;
 
 interface PetRepository
 {
+    public function beginTransaction(): void;
+
+    public function commitTransaction(): void;
+
+    public function rollBackTransaction(): void;
+
     /**
      * @throws Exception
      */
     public function delete(string $id): void;
+
+    /**
+     * @throws Exception
+     */
+    public function deleteAllFromOwnerId(string $ownerId);
 
     /**
      * @throws Exception
