@@ -19,7 +19,21 @@ final class PetPdo implements PetRepository
     public function __construct(
         private PDO $pdo,
         private ClientRepository $clientRepository
-    ){ }
+    ){}
+
+    public function delete(string $id): void
+    {
+        $query = <<<SQL
+            DELETE FROM `pet`
+            WHERE `id` = :id
+            LIMIT 1;
+        SQL;
+
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':id', $id, PDO::PARAM_STR);
+        $statement->execute();
+    }
 
     public function findAll(): PetCollection
     {

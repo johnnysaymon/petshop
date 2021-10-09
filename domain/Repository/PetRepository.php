@@ -13,6 +13,11 @@ interface PetRepository
     /**
      * @throws Exception
      */
+    public function delete(string $id): void;
+
+    /**
+     * @throws Exception
+     */
     public function findAll(): PetCollection;
 
     /**

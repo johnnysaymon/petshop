@@ -8,6 +8,7 @@ use App\Infra\Controller\Http\ClientFindById;
 use App\Infra\Controller\Http\ClientListing;
 use App\Infra\Controller\Http\ClientUpdate;
 use App\Infra\Controller\Http\PetCreate;
+use App\Infra\Controller\Http\PetDelete;
 use App\Infra\Controller\Http\PetListing;
 use App\Infra\Controller\Http\PetShow;
 use App\Infra\Controller\Http\PetUpdate;
@@ -46,9 +47,11 @@ $app->group('/pet', function (RouteCollectorProxy $group)
 
     $group->post('/', PetCreate::class);
 
+    $group->get('/{id}/', PetShow::class);
+
     $group->patch('/{id}/', PetUpdate::class);
 
-    $group->get('/{id}/', PetShow::class);
+    $group->delete('/{id}/', PetDelete::class);
 });
 
 
