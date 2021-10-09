@@ -1,0 +1,31 @@
+version: '3'
+services:
+  www:
+    build: './environment/docker/'
+    user: "${UID}:${GID}"
+    ports:
+      - '8000:80'
+    volumes:
+      - .:/project
+      - ./environment/apache:/etc/apache2/sites-available
+    links:
+      - db
+
+  composer:
+    image: composer:2.1.5
+    user: "${UID}:${GID}"
+    volumes:
+      - .:/project
+      - ${COMPOSER_CACHE}:/tmp
+    working_dir: /project
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: app
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./environment/database:/docker-entrypoint-initdb.d
