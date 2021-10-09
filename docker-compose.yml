@@ -29,3 +29,11 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./environment/database:/docker-entrypoint-initdb.d
+
+  test:
+    image: php:8.0-cli
+    user: "${UID}:${GID}"
+    volumes:
+      - .:/project
+    working_dir: /project
+    entrypoint: vendor/bin/phpunit
