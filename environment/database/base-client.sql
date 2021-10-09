@@ -1,0 +1,8 @@
+SET names 'utf8';
+
+CREATE TABLE IF NOT EXISTS `client` (
+    `id` VARCHAR(36) NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
+    `phone` VARCHAR(11) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
