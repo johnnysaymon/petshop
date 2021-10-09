@@ -29,4 +29,9 @@ interface ClientRepository
      * @throws Exception
      */
     public function store(Client $client): void;
+
+    /**
+     * @throws Exception
+     */
+    public function update(Client $client): void;
 }

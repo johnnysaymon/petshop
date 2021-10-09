@@ -6,6 +6,7 @@ use App\Infra\Container\Factory as ContainerFactory;
 use App\Infra\Controller\Http\ClientCreate;
 use App\Infra\Controller\Http\ClientFindById;
 use App\Infra\Controller\Http\ClientListing;
+use App\Infra\Controller\Http\ClientUpdate;
 use App\Infra\Controller\Http\PetCreate;
 use App\Infra\Controller\Http\PetListing;
 use App\Infra\Controller\Http\PetShow;
@@ -32,6 +33,8 @@ $app->group('/client', function (RouteCollectorProxy $group)
     $group->get('/', ClientListing::class);
 
     $group->post('/', ClientCreate::class);
+
+    $group->patch('/{id}/', ClientUpdate::class);
 
     $group->get('/{id}/', ClientFindById::class);
 });

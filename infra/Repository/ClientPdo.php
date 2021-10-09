@@ -139,4 +139,24 @@ final class ClientPdo implements ClientRepository
 
         $statement->execute();
     }
+
+    public function update(Client $client): void
+    {
+        $query = <<<SQL
+            UPDATE `client`
+            SET
+                `name` =  :name,
+                `phone` = :phone
+            WHERE
+                `id` = :id;
+        SQL;
+
+        $statement = $this->pdo->prepare($query);
+
+        $statement->bindValue(':id', $client->getId()->getValue(), PDO::PARAM_STR);
+        $statement->bindValue(':name', $client->getName()->getValue(), PDO::PARAM_STR);
+        $statement->bindValue(':phone', $client->getPhone()->getValue(), PDO::PARAM_STR);
+
+        $statement->execute();
+    }
 }
