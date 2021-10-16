@@ -27,6 +27,9 @@ final class Service
         $this->output = new Output();
     }
 
+    /**
+     * @throws Exception
+     */
     public function run(DataInput $dataInput): Output
     {
         $this->dataInput = $dataInput;
@@ -52,6 +55,7 @@ final class Service
     {
         if (empty($this->dataInput->name)) {
             $this->output->errorNameCode = self::ERROR_EMPTY;
+            return;
         }
 
         if (false === ClientName::isValid($this->dataInput->name)) {
@@ -63,6 +67,7 @@ final class Service
     {
         if (empty($this->dataInput->phone)) {
             $this->output->errorPhoneCode = self::ERROR_EMPTY;
+            return;
         }
 
         if (false === Phone::isValid($this->dataInput->phone)) {
