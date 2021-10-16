@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infra\Controller\Http;
 
-use App\Domain\UseCase\CreatePet\DataInput;
-use App\Domain\UseCase\CreatePet\Service as CreatePetUseCase;
+use App\Domain\UseCase\PetCreate\DataInput;
+use App\Domain\UseCase\PetCreate\Service as CreatePetUseCase;
 use App\Infra\Presenter\PetCreateResultApi;
 use Exception;
 use Psr\Http\Message\ServerRequestInterface as Request;

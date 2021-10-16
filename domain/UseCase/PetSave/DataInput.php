@@ -7,24 +7,24 @@ namespace App\Domain\UseCase\PetSave;
 class DataInput
 {
     public function __construct(
-        public ?string $id,
-        public ?string $species,
-        public ?string $breedName,
-        public ?string $name,
-        public ?string $age,
-        public ?string $ownerId,
+        public ?string $id = null,
+        public ?string $species = null,
+        public ?string $breedName = null,
+        public ?string $name = null,
+        public ?string $age = null,
+        public ?string $ownerId = null,
     ) {
     }
 
-    public static function createFromArray(array $data): DataInput
+    public static function feed(DataInput $dataInput, array $data): DataInput
     {
-        return new DataInput(
-            id: $data['id'] ?? null,
-            species: $data['species'] ?? null,
-            breedName: $data['breedName'] ?? null,
-            name: $data['name'] ?? null,
-            age: $data['age'] ?? null,
-            ownerId: $data['ownerId'] ?? null,
-        );
+        isset($data['id']) && $dataInput->id = (string) $data['id'];
+        isset($data['species']) && $dataInput->species = (string) $data['species'];
+        isset($data['breedName']) && $dataInput->breedName = (string) $data['breedName'];
+        isset($data['name']) && $dataInput->name = (string) $data['name'];
+        isset($data['age']) && $dataInput->age = (string) $data['age'];
+        isset($data['ownerId']) && $dataInput->ownerId = (string) $data['ownerId'];
+
+        return $dataInput;
     }
 }

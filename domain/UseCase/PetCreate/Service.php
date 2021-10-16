@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\UseCase\CreatePet;
+namespace App\Domain\UseCase\PetCreate;
 
 use App\Domain\Entity\Client\Client;
 use App\Domain\Entity\Pet\Pet;

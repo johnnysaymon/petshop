@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infra\Presenter;
 
-use App\Domain\UseCase\CreatePet\Output;
-use App\Domain\UseCase\CreatePet\Service;
+use App\Domain\UseCase\PetCreate\Output;
+use App\Domain\UseCase\PetCreate\Service;
 use Psr\Http\Message\ResponseInterface as Response;
 use Exception;
 

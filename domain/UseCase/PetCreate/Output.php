@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\UseCase\CreatePet;
+namespace App\Domain\UseCase\PetCreate;
 
 final class Output
 {
