@@ -13,7 +13,7 @@ final class Uuid implements Stringable
     private string $value;
 
     public function __construct(
-        ?string $id,
+        ?string $id = null,
     ) {
         if (empty($id)) {
             $id = UuidLib::uuid4()->toString();
