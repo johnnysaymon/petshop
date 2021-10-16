@@ -1,6 +1,10 @@
 # API
 
-## Criar Client
+---
+
+## Cliente
+
+### Criar
 
 `POST /client/`
 
@@ -13,11 +17,11 @@ Contendo o seguinte corpo:
 }
 ```
 
-## Obter Client
+### Obter Lista
 
 `GET /client/`
 
-Com um retorno semelhante a esse:
+Com um retorno semelhante:
 
 ```
 {
@@ -37,11 +41,11 @@ Com um retorno semelhante a esse:
 }
 ```
 
-## Obter Cliente por ID
+### Obter por ID
 
 `GET /client/{uuid}/`
 
-Com um retorno semelhante a esse:
+Com um retorno semelhante:
 
 ```
 {
@@ -56,7 +60,33 @@ Com um retorno semelhante a esse:
 }
 ```
 
-## Criar Pet
+### Atualizar
+
+`PATCH /client/{uuid}/`
+
+Com o seguinte corpo:
+
+```
+{
+    "name": "Elizangela",
+    "phone": "88992417816"
+}
+```
+
+Sem corpo na resposta.
+
+
+### Excluir
+
+`DELETE /client/{uuid}/`
+
+Sem corpo na resposta.
+
+---
+
+## Pet
+
+### Criar
 
 `POST /pet/`
 
@@ -64,19 +94,19 @@ Contendo o seguinte corpo:
 
 ```
 {
-	"species": "cat",
-	"breedName": "Persa",
-	"name": "Didi",
-	"age": 2,
-	"ownerId": "2f60b027-64b8-4d0a-a22e-a0404e14f294"
+    "species": "cat",
+    "breedName": "Persa",
+    "name": "Didi",
+    "age": 2,
+    "ownerId": "2f60b027-64b8-4d0a-a22e-a0404e14f294"
 }
 ```
 
-## Obter Pets
+### Obter Lista
 
 `GET /pet/`
 
-Com um retorno semelhante a esse:
+Com um retorno semelhante:
 
 ```
 {
@@ -109,3 +139,54 @@ Com um retorno semelhante a esse:
   ]
 }
 ```
+
+### Obter por ID
+
+`GET /pet/{uuid}/`
+
+Com um retorno semelhante:
+
+```
+{
+  "status": true,
+  "data": {
+    "name": "Bob",
+    "id": "fed2904b-6965-427f-834a-acc335df6547",
+    "age": 5,
+    "owner": {
+      "name": "Elizangela",
+      "phone": "88992417816",
+      "id": "64ac0dd6-64f0-4709-9737-bf0e8fc7828c"
+    },
+    "species": "dog",
+    "breed": "Pug"
+  }
+}
+```
+
+### Atualizar
+
+`PATCH /pet/{uuid}/`
+
+Contendo o seguinte corpo:
+
+```
+{
+    "name": "Brutos",
+    "age": 2,
+    "ownerId": "64ac0dd6-64f0-4709-9737-bf0e8fc7828c",
+    "species": "dog",
+    "breed": "Pug"
+}
+```
+Só é necessário enviar o que precisa ser alterado.
+
+Sem corpo na resposta.
+
+### Excluir
+
+`DELETE /pet/{uuid}/`
+
+Sem corpo no envio e na resposta.
+
+---
