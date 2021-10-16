@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infra\Controller\Http;
 
-use App\Domain\UseCase\CreateClient\DataInput;
-use App\Domain\UseCase\CreateClient\Service as CreateClientUseCase;
+use App\Domain\UseCase\ClientCreate\DataInput;
+use App\Domain\UseCase\ClientCreate\Service as CreateClientUseCase;
 use App\Infra\Presenter\ClientCreateResultApi;
 use Exception;
 use Psr\Http\Message\ServerRequestInterface as Request;

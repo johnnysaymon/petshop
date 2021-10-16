@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Tests\Domain\UseCase\CreateClient;
 
 use App\Domain\Repository\ClientRepository;
-use App\Domain\UseCase\CreateClient\DataInput;
-use App\Domain\UseCase\CreateClient\Service;
+use App\Domain\UseCase\ClientCreate\DataInput;
+use App\Domain\UseCase\ClientCreate\Service;
 use PHPUnit\Framework\TestCase;
 
 class ServiceTest extends TestCase

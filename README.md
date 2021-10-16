@@ -31,6 +31,14 @@ Antes é necessário checar se a porta 8000 já não está sendo usada por outro
 `docker-compose down`
 
 
+## Testes
+
+Para rodar os testes unitários usar o comando:
+
+`docker-compose rum --rm tests`
+
+
 ## Mais informações
 
 - [API](doc/api.md)
+- [Sobre o Projeto](doc/about.md)

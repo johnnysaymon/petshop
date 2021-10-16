@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\UseCase\CreateClient;
+namespace App\Domain\UseCase\ClientCreate;
 
 use App\Domain\Entity\Client\Client;
 use App\Domain\Entity\Client\ClientFactory;

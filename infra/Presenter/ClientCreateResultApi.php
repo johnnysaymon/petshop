@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infra\Presenter;
 
-use App\Domain\UseCase\CreateClient\Output;
-use App\Domain\UseCase\CreateClient\Service;
+use App\Domain\UseCase\ClientCreate\Output;
+use App\Domain\UseCase\ClientCreate\Service;
 use Psr\Http\Message\ResponseInterface as Response;
 use Exception;
 
