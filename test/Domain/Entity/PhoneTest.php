@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Domain;
+namespace App\Tests\Domain\Entity;
 
 use App\Domain\Entity\Phone;
 use PHPUnit\Framework\TestCase;
 
 class PhoneTest extends TestCase
 {
-    public function testCreateFromString()
+    public function testCreateFromString(): void
     {
         $phoneNumber = '88123451234';
         $phone = Phone::createFromString($phoneNumber);
         $this->assertEquals($phoneNumber, $phone->getValue());
     }
 
-    public function testGetPrefix()
+    public function testGetPrefix(): void
     {
         $ddd = '88';
         $prefix = '12345';
@@ -26,7 +26,7 @@ class PhoneTest extends TestCase
         $this->assertEquals($prefix, $phone->getPrefix());
     }
 
-    public function testIsValid()
+    public function testIsValid(): void
     {
         $this->assertTrue(Phone::isValid('88123451234'));
         $this->assertTrue(Phone::isValid('8812341234'));
@@ -38,7 +38,7 @@ class PhoneTest extends TestCase
         $this->assertFalse(Phone::isValid('abc'));
     }
 
-    public function testGetDdd()
+    public function testGetDdd(): void
     {
         $ddd = '88';
         $prefix = '12345';
@@ -48,7 +48,7 @@ class PhoneTest extends TestCase
         $this->assertEquals($ddd, $phone->getDdd());
     }
 
-    public function testGetValue()
+    public function testGetValue(): void
     {
         $ddd = '88';
         $prefix = '12345';
@@ -58,7 +58,7 @@ class PhoneTest extends TestCase
         $this->assertEquals($ddd.$prefix.$number, $phone->getValue());
     }
 
-    public function testGetNumber()
+    public function testGetNumber(): void
     {
         $ddd = '88';
         $prefix = '12345';
@@ -68,10 +68,30 @@ class PhoneTest extends TestCase
         $this->assertEquals($number, $phone->getNumber());
     }
 
-    public function testGetFormated()
+    public function testGetFormated(): void
     {
         $phone = new Phone('88', '1234', '5678');
 
         $this->assertEquals('(88) 1234-5678', $phone->getFormated());
+    }
+
+    public static function getPhone(): Phone
+    {
+        $data = self::getData();
+
+        return new Phone(
+            ddd: $data->ddd,
+            prefix: $data->prefix,
+            number: $data->number
+        );
+    }
+
+    public static function getData(): Object
+    {
+        return (object) [
+            'ddd' => '88',
+            'prefix' => '1234',
+            'number' => '5678',
+        ];
     }
 }
