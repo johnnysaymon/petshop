@@ -1,4 +1,4 @@
-# Sistema de Gestão de Itens do Serviço de Assistência Técnica
+# Sistema de Gestão de Animais em um Petshop
 
 ## Dependências
 
